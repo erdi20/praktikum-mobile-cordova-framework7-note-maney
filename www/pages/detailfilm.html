@@ -1,0 +1,46 @@
+<template>
+  <div class="page" style="background: white">
+    <div class="navbar" style="background-color: transparent">
+      <div class="navbar-inner">
+        <div class="right">
+          <a href="#" class="link back">
+            <i class="icon f7-icons color-white">xmark</i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="page-content">
+      <img src="" style="width: 100%; margin-top: -85px" id="detail_sampul" /><br />
+      <p class="font18 card-content-padding" style="text-align: justify; margin-top: -10px" id="detail_data"></p>
+      <br />
+    </div>
+  </div>
+</template>
+<script>
+  export default function (props, ctx) {
+    let $on = ctx.$on;
+    $on("pageInit", () => {
+      let sampul = sessionStorage.sampul;
+      let judul = sessionStorage.judul;
+      let sinopsis = sessionStorage.sinopsis;
+      let aktor = sessionStorage.aktor;
+      let rilis = sessionStorage.tahun;
+      let rating = sessionStorage.rating;
+      $("#detail_sampul").attr("src", sampul);
+      let data = `
+                <b>Judul:</b><br>${judul}<br>
+                <b>Sinopsis:</b><br>${sinopsis}<br>
+                <b>Aktor:</b><br>${aktor}<br>
+                <b>Tahun:</b>${rilis}<br>
+                <b>Rating:</b> ${rating}<br>
+                <div class="chip" data-sp="${sinopsis}" style="margin-top: 10px;" onclick="ubahkesuara(this)">
+                    <div class="chip-media bg-color-blue">
+                        <i class="icon f7-icons">speaker_3_fill</i>
+                    </div>
+                <div class="chip-label">Sinopsis By Voice</div>
+            </div>`;
+      $("#detail_data").html(data);
+    });
+    return $render;
+  }
+</script>

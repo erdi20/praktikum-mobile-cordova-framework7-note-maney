@@ -1,0 +1,153 @@
+<template>
+  <div class="page" style="background-color: #f0f8ff">
+    <div class="navbar">
+      <div class="navbar-inner" style="background-color: #ffffff; box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05)">
+        <div class="right" style="margin-right: 15px">
+          <a href="#" class="link">
+            <i class="icon f7-icons" style="color: #424242">bell</i>
+          </a>
+        </div>
+        <div class="title text-align-center">
+          <i class="icon f7-icons" style="font-size: 1.6rem; vertical-align: middle; margin-right: 8px; color: #2196f3">wallet_fill</i>
+          <span style="font-size: 1.5rem; font-weight: bold; color: #2196f3">E-Wallet</span>
+        </div>
+      </div>
+    </div>
+    <div class="page-content">
+      <div class="block" style="padding: 20px">
+        <div style="background-color: #e3f2fd; border-radius: 10px; padding: 20px; box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08)">
+          <h2 style="color: #1976d2; font-weight: bold; margin-bottom: 5px">Sisa Saldo</h2>
+          <p style="font-size: 1.8rem; color: #1e88e5; font-weight: bold">Rp. 240.000</p>
+        </div>
+      </div>
+      <div class="block">
+        <div class="bg-color-white justify-content-space-evenly" style="box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); border-radius: 15px; padding: 15px 0; display: flex; justify-content: space-around; align-items: center">
+          <div class="text-align-center">
+            <button id="scanButton" class="link color-black scan-barcode-button" style="display: block; border: none; background: none; padding: 0; margin: 0; cursor: pointer">
+              <div style="background-color: #a5d6a7; border-radius: 50%; width: 45px; height: 45px; display: flex; justify-content: center; align-items: center; margin: 0 auto">
+                <i class="icon f7-icons" style="font-size: 1.3rem; color: #388e3c">qrcode_viewfinder</i>
+              </div>
+              <span class="" style="margin-top: 5px; font-size: 0.85rem; color: #424242">Scan</span>
+            </button>
+          </div>
+          <div class="text-align-center">
+            <a href="#" class="link color-black" style="display: block">
+              <div style="background-color: #bbdefb; border-radius: 50%; width: 45px; height: 45px; display: flex; justify-content: center; align-items: center; margin: 0 auto">
+                <i class="icon f7-icons" style="font-size: 1.3rem; color: #1976d2">plus_circle</i>
+              </div>
+              <span class="" style="margin-top: 5px; font-size: 0.85rem; color: #424242">Isi Saldo</span>
+            </a>
+          </div>
+          <div class="text-align-center">
+            <a href="#" class="link color-black" style="display: block">
+              <div style="background-color: #b3e5fc; border-radius: 50%; width: 45px; height: 45px; display: flex; justify-content: center; align-items: center; margin: 0 auto">
+                <i class="icon f7-icons" style="font-size: 1.3rem; color: #0288d1">arrow_right_arrow_left_circle</i>
+              </div>
+              <span class="" style="margin-top: 5px; font-size: 0.85rem; color: #424242">Transfer</span>
+            </a>
+          </div>
+          <div class="text-align-center">
+            <a href="#" class="link color-black" style="display: block">
+              <div style="background-color: #cddc39; border-radius: 50%; width: 45px; height: 45px; display: flex; justify-content: center; align-items: center; margin: 0 auto">
+                <i class="icon f7-icons" style="font-size: 1.3rem; color: #827717">person_crop_circle_fill_badge_exclam</i>
+              </div>
+              <span class="" style="margin-top: 5px; font-size: 0.85rem; color: #424242">Pengingat</span>
+            </a>
+          </div>
+        </div>
+      </div>
+      <div class="block" style="background-color: white; border-radius: 30px 30px 0 0; min-height: 60vh; padding: 20px">
+        <div style="display: flex; justify-content: space-around; padding-top: 20px; padding-bottom: 10px">
+          <a class="text-align-center" style="flex: 1; margin-right: 10px; color: #424242">
+            <div style="background-color: #ffe0b2; border-radius: 15px; width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; margin: 0 auto">
+              <i class="icon f7-icons" style="font-size: 1.5rem; color: #f57c00">device_phone_portrait</i>
+            </div>
+            <span style="display: block; margin-top: 5px; font-size: 0.9rem">Pulsa</span>
+          </a>
+          <a class="text-align-center" style="flex: 1; margin-right: 10px; color: #424242">
+            <div style="background-color: #ffccbc; border-radius: 15px; width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; margin: 0 auto">
+              <i class="icon f7-icons" style="font-size: 1.5rem; color: #e64a19">bolt_fill</i>
+            </div>
+            <span style="display: block; margin-top: 5px; font-size: 0.9rem">Listrik</span>
+          </a>
+          <a class="text-align-center" style="flex: 1; color: #424242">
+            <div style="background-color: #b2ebf2; border-radius: 15px; width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; margin: 0 auto">
+              <i class="icon f7-icons" style="font-size: 1.5rem; color: #00bcd4">drop_fill</i>
+            </div>
+            <span style="display: block; margin-top: 5px; font-size: 0.9rem">PDAM</span>
+          </a>
+        </div>
+        <div style="display: flex; justify-content: space-around; margin-top: 30px">
+          <a class="text-align-center" style="flex: 1; margin-right: 10px; color: #424242">
+            <div style="background-color: #dcedc8; border-radius: 15px; width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; margin: 0 auto">
+              <i class="icon f7-icons" style="font-size: 1.5rem; color: #689f38">cart_fill</i>
+            </div>
+            <span style="display: block; margin-top: 5px; font-size: 0.9rem">Barang</span>
+          </a>
+          <a class="text-align-center" style="flex: 1; margin-right: 10px; color: #424242">
+            <div style="background-color: #e1bee7; border-radius: 15px; width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; margin: 0 auto">
+              <i class="icon f7-icons" style="font-size: 1.5rem; color: #9c27b0">tv</i>
+            </div>
+            <span style="display: block; margin-top: 5px; font-size: 0.9rem">TV kabel</span>
+          </a>
+          <a class="text-align-center" style="flex: 1; color: #424242">
+            <div style="background-color: #cddc39; border-radius: 15px; width: 50px; height: 50px; display: flex; justify-content: center; align-items: center; margin: 0 auto">
+              <i class="icon f7-icons" style="font-size: 1.5rem; color: #827717">wifi</i>
+            </div>
+            <span style="display: block; margin-top: 5px; font-size: 0.9rem">Internet</span>
+          </a>
+        </div>
+        <div style="margin-top: 30px; padding: 0 15px">
+          <h3 style="color: #212121">Informasi</h3>
+          <p style="color: #757575">Dapatkan info dan penawaran menarik</p>
+        </div>
+        <div style="margin-top: 20px">
+          <swiper-container class="demo-swiper-multiple ml-15 mr-15 color-white" pagination space-between="30" data-loop="true" autoplay>
+            <swiper-slide class="radius15 text-color-white" style="background: #ef5350; padding: 20px; display: flex; justify-content: center; align-items: center">Iklan 1</swiper-slide>
+            <swiper-slide class="radius15 text-color-white" style="background: #42a5f5; padding: 20px; display: flex; justify-content: center; align-items: center">Iklan 2</swiper-slide>
+            <swiper-slide class="radius15 text-color-white" style="background: #ab47bc; padding: 20px; display: flex; justify-content: center; align-items: center">Iklan 3</swiper-slide>
+            <swiper-slide class="radius15 text-color-white" style="background: #26a69a; padding: 20px; display: flex; justify-content: center; align-items: center">Iklan 4</swiper-slide>
+            <swiper-slide class="radius15 text-color-white" style="background: #ffa726; padding: 20px; display: flex; justify-content: center; align-items: center">Iklan 5</swiper-slide>
+          </swiper-container>
+        </div>
+      </div>
+    </div>
+    <div class="toolbar tabbar tabbar-icons toolbar-bottom" style="background-color: #f5f5f5; box-shadow: 0 -2px 4px rgba(0, 0, 0, 0.05)">
+      <div class="toolbar-inner">
+        <a href="/" class="tab-link tab-link-active" style="color: #1976d2">
+          <i class="icon f7-icons">house</i>
+          <span class="tabbar-label">Beranda</span>
+        </a>
+        <a href="" class="tab-link scan-barcode-button" style="color: #424242">
+          <i class="icon f7-icons">arrow_counterclockwise_circle_fill</i>
+          <span class="tabbar-label">Riwayat</span>
+        </a>
+        <a href="" class="tab-link" style="color: #424242">
+          <i class="icon f7-icons">person_circle</i>
+          <span class="tabbar-label">Profil</span>
+        </a>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+  export default function (props, ctx) {
+    let $on = ctx.$on;
+
+    $on("pageInit", () => {
+      const scanButton = document.getElementById("scanButton");
+      if (scanButton) {
+        scanButton.addEventListener("click", () => {
+          if (window.scanBarcode) {
+            window.scanBarcode();
+          } else {
+            app.dialog.alert("Fungsi pemindaian belum siap.", "Error");
+            console.error("Fungsi scanBarcode tidak ditemukan.");
+          }
+        });
+      }
+    });
+
+    return $render;
+  }
+</script>

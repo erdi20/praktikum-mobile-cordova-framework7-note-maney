@@ -1,0 +1,27 @@
+<template>
+  <div class="pageb page">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="title text-color-white">Daftar Film</div>
+        <div class="right">
+          <a href="#" class="link back" style="background-color: #34495e">
+            <i class="icon f7-icons" style="color: white">xmark</i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="page-content">
+      <div class="row grid grid-cols-2" id="blokfilm" style="margin-top: -10px"></div>
+      <br /><br />
+    </div>
+  </div>
+</template>
+<script>
+  export default function (props, ctx) {
+    let $on = ctx.$on;
+    $on("pageInit", () => {
+      tampilfilm();
+    });
+    return $render;
+  }
+</script>
