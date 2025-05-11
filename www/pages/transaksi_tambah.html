@@ -1,0 +1,84 @@
+<template>
+  <div class="page pageb">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="title text-color-white">Transaksi Baru</div>
+        <div class="right">
+          <a href="" class="link back">
+            <i class="icon f7-icons color-white">xmark</i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="page-content">
+      <div class="card card-outline warna_dasar_putih">
+        <div class="card-header">Form Transaksi</div>
+        <div class="card-content card-content-padding">
+          <div class="list list-strong-ios list-dividers-ios inset-ios" style="margin-bottom: 10px">
+            <ul>
+              <li class="item-content item-input item-input-outline">
+                <div class="item-media">
+                  <i class="icon f7-icons">calender</i>
+                </div>
+                <div class="item-inner">
+                  <div class="item-title item-label">Tanggal</div>
+                  <div class="item-input-wrap">
+                    <input type="datetime-local" id="txttgljam" class="formtransaksi" placeholder="Tanggal Jam Transaksi" />
+                  </div>
+                </div>
+              </li>
+              <li class="item-content item-input item-input-outline">
+                <div class="item-media">
+                  <i class="icon f7-icons">Number</i>
+                </div>
+                <div class="item-inner">
+                  <div class="item-title item-label">Nominal</div>
+                  <div class="item-input-wrap">
+                    <input type="number" id="txtnominal" class="formtransaksi" placeholder="Nominal Uang" />
+                    <span class="input-clear-button"></span>
+                  </div>
+                </div>
+              </li>
+              <li class="item-content item-input item-input-outline">
+                <div class="item-media">
+                  <i class="icon f7-icons">tag</i>
+                </div>
+                <div class="item-inner">
+                  <div class="item-title item-label">Jenis Transaksi</div>
+                  <div class="item-input-wrap">
+                    <select class="formtransaksi" id="cbojenis">
+                      <option value="">Pilih Salah Satu</option>
+                      <option value="+">Pemasukan</option>
+                      <option value="-">Pengeluaran</option>
+                    </select>
+                  </div>
+                </div>
+              </li>
+              <li class="item-content item-input item-input-outline">
+                <div class="item-media">
+                  <i class="icon f7-icons">textformat_abc</i>
+                </div>
+                <div class="item-inner">
+                  <div class="item-title item-label">Uraian</div>
+                  <div class="item-input-wrap">
+                    <textarea id="txturaian" class="formtransaksi" placeholder="Uraian Transaksi" />
+                    <span class="input-clear-button"></span>
+                  </div>
+                </div>
+              </li>
+            </ul>
+          </div>
+          <div class="grid grid-cols-2 grid-gap">
+            <button type="button" class="button button-fill color-blue" id="transaksi_btntambah" @click="${()=>tambahTransaksi()}">Tambahkan</button>
+            <button type="button" class="button button-fill color-red" id="transaksi_btnreset" @click="${()=>kosongFormTransaksi()}">Reset</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+  export default function (props, ctx) {
+    return $render;
+  }
+</script>

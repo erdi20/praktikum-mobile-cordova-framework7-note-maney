@@ -74,6 +74,9 @@ function sekarang() {
   let dt = saatIni.getSeconds() <= 9 ? `0${saatIni.getSeconds()}` : saatIni.getSeconds();
   return `${hr}, ${tgl} ${bln} ${th} <br> ${jm}:${mn}:${dt}`;
 }
+setInterval(function () {
+  $("#bloktglskr").html(sekarang());
+}, 1000);
 function tampilfilm() {
   let hasil = "";
   let x;

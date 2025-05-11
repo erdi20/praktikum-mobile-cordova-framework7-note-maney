@@ -5,7 +5,7 @@
     <meta name="mobile-web-app-capable" content="yes" />
     <meta name="mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="theme-color" content="#fff" />
-    <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: https://app.sandbox.midtrans.com/snap/v1/transactions">
+    <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data: https://app.sandbox.midtrans.com/snap/v1/transactions" />
     <!-- <meta http-equiv="Content-Security-Policy" content="default-src * 'self' 'unsafe-inline' 'unsafe-eval' data:" /> -->
     <title>Noted Money</title>
     <script type="text/javascript" src="https://app.sandbox.midtrans.com/snap/snap.js" data-client-key="SB-Mid-client--uZh-xG_onDoxyOg"></script>
@@ -20,9 +20,131 @@
       <div class="view view-main view-init safe-areas" data-master-detail-breakpoint="768" data-url="/"></div>
     </div>
     <script>
-      setInterval(function () {
-        $("#bloktglskr").html(sekarang());
-      }, 1000);
+      let db;
+      // setInterval(function () {
+      //   $("#bloktglskr").html(sekarang());
+      // }, 1000);
+      konfigurasidb();
+      function konfigurasidb() {
+        if (window.indexedDB) {
+          let request = window.indexedDB.open("dbkeuangan", 1);
+          request.onupgradeneeded = function (e) {
+            db = e.target.result;
+            if (!db.objectStoreNames.contains("transaksi")) {
+              let tbl = db.createObjectStore("transaksi", { keyPath: "id" });
+              tbl.createIndex("tgl_jam", "tgl_jam", { unique: false });
+              tbl.createIndex("nominal", "nominal", { unique: false });
+              tbl.createIndex("jenis", "jenis", { unique: false });
+              tbl.createIndex("uraian", "uraian", { unique: false });
+            }
+          };
+          request.onsuccess = (event) => {
+            db = event.target.result;
+          };
+          request.onerror = (event) => {
+            app.dialog.alert(`Database Error: ${event.target.errorCode}`, "Error");
+          };
+        }
+      }
+
+      function kosongFormTransaksi() {
+        $(".formtransaksi").val("");
+        $(".formtransaksi").val("").change();
+      }
+
+      function tambahTransaksi() {
+        let tgljam = $("#txttgljam").val();
+        let nominal = $("#txtnominal").val();
+        let jenis = $("#cbojenis").val();
+        let uraian = $("#txturaian").val();
+        if (tgljam == "" || nominal == "" || jenis == "" || uraian == "") {
+          app.dialog.alert("Ada isian yang masih kosong", "Error");
+          return;
+        }
+        if (parseInt(nominal) <= 0) {
+          app.dialog.alert("Isian nominal invalid", "Error");
+          return;
+        }
+        let idtransaksi = String(Date.now());
+        let jam = tgljam.replace("T", "") + ":00";
+        let data = { id: idtransaksi.slice(0, -2), tgl_jam: jam, nominal: nominal, jenis: jenis, uraian: uraian };
+        let proses = db.transaction(["transaksi"], "readwrite").objectStore("transaksi").add(data);
+        proses.onsuccess = function (event) {
+          app.dialog.alert("Transaksi Berhasil Ditambahkan", "Sukses");
+          kosongFormTransaksi;
+        };
+        proses.onerror = function (event) {
+          app.dialog.alert(`Transaksi gagal dilakukan: ${event.target.errorCode}`, "Error");
+        };
+      }
+      function riwayatTransaksi() {
+        let baca = db.transaction(["transaksi"], "readonly").objectStore("transaksi").index("tgl_jam").openCursor(null, "prev");
+        baca.onsuccess = function (event) {
+          let item = event.target.result;
+          if (item) {
+            let dtx;
+            let tgljam = item.value.tgl_jam;
+            let nominal = item.value.nominal;
+            let jenis = item.value.jenis;
+            let uraian = item.value.uraian;
+            let icon, angka, warnatulisan;
+            if (jenis == "+") {
+              icon = "tray_arrow_down";
+              angka = formatRibuan(nominal);
+              warnatulisan = "warna_tulisan_hijau";
+            } else {
+              icon = "tray_arrow_up";
+              angka = "-" + formatRibuan(nominal);
+              warnatulisan = "warna_tulisan_merah";
+            }
+            dtx = `
+            <li>
+              <a href="" class="item-link item-content">
+                <div class="item-media ${warnatulisan}">
+                  <i class="icon f7-icons">${icon}</i>
+                </div>
+                <div class="item-inner">
+                  <div class="item-title">
+                    ${uraian}
+                    <div class="item-footer">${terjemah_tgl_jam(tgljam)}</div>
+                  </div>
+                  <div class="item-after">Rp. ${angka}</div>
+                </div>
+              </a>
+            </li>
+            `;
+            $("#transaksi_blok").append(dtx);
+            item.continue();
+          }
+        };
+        baca.onerror = function (event) {
+          $("#transaksi_blok").html("");
+          app.dialog.alert(`Transaksi gagal dibaca: ${event.target.errorCode}`, "Error");
+        };
+      }
+      function terjemah_tgl_jam(tglJam) {
+        const tanggal = new Date(tglJam);
+        const optionsTanggal = { day: "numeric", month: "long", year: "numeric" };
+        const optionsWaktu = { hour: "numeric", minute: "2-digit", second: "2-digit" };
+
+        const tanggalTerformat = tanggal.toLocaleDateString("id-ID", optionsTanggal);
+        const waktuTerformat = tanggal.toLocaleTimeString("id-ID", optionsWaktu);
+
+        return `${tanggalTerformat}, ${waktuTerformat}`;
+      }
+      function formatRibuan(angka) {
+        return new Intl.NumberFormat("id-ID").format(angka);
+      }
+      function terjemah_tgl_jam(tgljam) {
+        const tanggal = tgljam.slice(0, 10);
+        const waktu = tgljam.slice(10);
+        const [tahun, bulan, hari] = tanggal.split("-");
+        const [jam, menit, detik] = waktu.split(":");
+
+        const namaBulan = ["", "Januari", "Februari", "Maret", "April", "Mei", "Juni", "Juli", "Agustus", "September", "Oktober", "November", "Desember"][parseInt(bulan)];
+
+        return `${parseInt(hari)} ${namaBulan} ${tahun}, ${jam}:${menit}:${detik}`;
+      }
     </script>
     <script src="./core/framework7-bundle.min.js"></script>
     <script src="js/jquery-3.7.1.min.js"></script>

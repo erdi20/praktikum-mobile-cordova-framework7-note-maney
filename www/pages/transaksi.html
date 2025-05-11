@@ -1,0 +1,46 @@
+<template>
+  <div class="page pageb">
+    <div class="navbar">
+      <div class="navbar-inner">
+        <div class="title text-color-white">Daftar Transaksi</div>
+        <div class="right">
+          <a href="" class="link back">
+            <i class="icon f7-icons color-white">xmark</i>
+          </a>
+        </div>
+      </div>
+    </div>
+    <div class="card card-outline warna_dasar_putih" style="margin: 90px 7px 10px 7px">
+      <div class="card-content card-content-padding">
+        <div class="grid grid-cols-2 grid-gap font18">
+          <div>Uraian</div>
+          <div class="text-align-right">Nominal</div>
+        </div>
+      </div>
+    </div>
+    <div class="fab fab-right-bottom">
+      <a href="/uangt/" class="text-color-white" style="background-color: #34495e">
+        <i class="icon f7-icons">plus</i>
+      </a>
+    </div>
+    <div class="page-content" style="margin-top: -80px">
+      <div class="card card-outline warna_dasar_putih" style="margin: 0px 7px 10px 7px">
+        <div class="card-content card-content-padding">
+          <div class="list list-outline-ios list-strong-ios list-dividers-ios no-chevron">
+            <ul id="transaksi_blok"></ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+<script>
+  export default function (props, ctx) {
+    let $on = ctx.$on;
+    $on("pageAfterIn", () => {
+      $("#transaksi_blok").html("");
+      riwayatTransaksi();
+    });
+    return $render;
+  }
+</script>

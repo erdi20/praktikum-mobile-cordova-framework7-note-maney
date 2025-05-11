@@ -70,3 +70,22 @@ body {
   margin-left: auto;
   margin-right: auto;
 }
+.besar-icon48p{
+  width: 48px;
+}
+.bawah10p{
+  margin-bottom: 10px;
+
+}
+.warna_dasar_sistem{
+  border-color: #34495e;
+}
+.warna_dasar_putih{
+  border-color: #fff;
+}
+.warna_tulisan_hijau{
+  color: green;
+}
+.warna_tulisan_merah{
+  color: red;
+}
